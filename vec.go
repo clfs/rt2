@@ -1,7 +1,14 @@
 package rt2
 
+import "math"
+
 type Vec struct {
 	X, Y float64
+}
+
+// NewVec returns a new vector <x, y>.
+func NewVec(x, y float64) Vec {
+	return Vec{x, y}
 }
 
 // Add sets v to a+b and returns v.
@@ -37,4 +44,9 @@ func (v *Vec) Neg(a *Vec) *Vec {
 	v.X = -a.X
 	v.Y = -a.Y
 	return v
+}
+
+// Dist returns the distance between v and a.
+func (v *Vec) Dist(a *Vec) float64 {
+	return math.Sqrt((a.X-v.X)*(a.X-v.X) + (a.Y-v.Y)*(a.Y-v.Y))
 }

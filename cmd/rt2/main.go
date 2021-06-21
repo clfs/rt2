@@ -1,16 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"log"
 	"os"
 )
 
 func main() {
+	log.SetFlags(0)
+
 	var outputFlag string
 
-	flag.StringVar(&outputFlag, "output", "", "the file to output to")
+	flag.StringVar(&outputFlag, "output", "render.png", "the file to output to")
 	flag.Parse()
 
 	if outputFlag == "" {
@@ -24,10 +25,7 @@ func main() {
 	}
 	defer f.Close()
 
-	r := Render{
-		w: bufio.NewWriter(f),
-	}
-
+	r := Render{w: f}
 	if err := r.Run(); err != nil {
 		log.Fatal(err)
 	}
